@@ -108,7 +108,7 @@ class MeetUpForm extends Component {
   }
 
   deleteStation(station) {
-    let stationName = station+"역";
+    let stationName = station;
     let fullName = stationName + '+' + this.state.lineName;
 
     let stationsTmp = this.state.stations;
