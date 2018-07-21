@@ -32,8 +32,9 @@ class MeetUpForm extends Component {
   }
   
   getFriendsList() {
-    axios.get(`http://sample-application-development.tzuwucqkx7.us-west-2.elasticbeanstalk.com/friends/${this.props.hostId}`).then((friends) => {
-      this.setState({
+    //axios.get(`http://sample-application-development.tzuwucqkx7.us-west-2.elasticbeanstalk.com/friends/${this.props.hostId}`).then((friends) => {
+    axios.get(`http://localhost:8080/friends/${this.props.hostId}`).then((friends) => {
+    this.setState({
         hostsFriends: friends.data,
         isLoaded: true
       });
@@ -56,7 +57,8 @@ class MeetUpForm extends Component {
   }
   
   sendGroupInfo() {
-    axios.post('http://sample-application-development.tzuwucqkx7.us-west-2.elasticbeanstalk.com/meetups', {
+    //axios.post('http://sample-application-development.tzuwucqkx7.us-west-2.elasticbeanstalk.com/meetups', {
+    axios.post('http://localhost:8080/meetups', {
       hostId: this.props.hostId,
       title: this.state.title,
       hotPlaces: this.state.places,
@@ -151,17 +153,17 @@ class MeetUpForm extends Component {
       <div className="MeetUpForm">
         <div className="title">CREATE NEW MEETUPS</div>
         <div className="form-header">
-          <input className="input-title" type="text" placeholder="INPUT MEETUP TITLE"
-            value={this.state.title}
-            onChange={this.setTitle.bind(this)}
-          />
           <div>
+            <input className="input-title" type="text" placeholder="INPUT MEETUP TITLE"
+              value={this.state.title}
+              onChange={this.setTitle.bind(this)}
+            />
+          </div>
             <img className="location-pin" onClick={this.getMyLocation.bind(this)} src={pin}/>
             <div className="address">{this.state.myAddress ? this.state.myAddress : ''}</div>
-          </div>
         </div>
-        <div>
-          <div className="options">
+        <div className="options">
+          <div className="option">
             <ul className="navigation">
               <a className="metro">SELECT METRO</a>
                 {
@@ -178,7 +180,7 @@ class MeetUpForm extends Component {
             </ul>
           </div>
 
-          <div className="options">
+          <div className="option">
             <ul className="navigation">
               <a className="station">
                 { this.state.lineName ?
@@ -198,7 +200,7 @@ class MeetUpForm extends Component {
             </ul>
           </div>
 
-          <div className="options">
+          <div className="option">
             <ul className="navigation">
               <a className="friend">MY FRIENDS</a>
                 {
