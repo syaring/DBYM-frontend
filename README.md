@@ -1,10 +1,10 @@
-##Introduction##
+## Introduction
 
 DBYM은 'Distance Between You and Me'의 약자로, 서로 다른 지역에 살고있는 친구들 사이에 가장 가까운 핫플레이스를 찾아주는 웹사이트 입니다.
 
 
 
-##Requirements##
+## Requirements
 
 - Facebook Login API를 사용했습니다.
 - 사용자가 Facebook에 가입하고, 친구들이 DBYM을 사용하고 있어야 합니다.
@@ -12,7 +12,7 @@ DBYM은 'Distance Between You and Me'의 약자로, 서로 다른 지역에 살�
 
 
 
-##Development Environment##
+## Development Environment
 
 - Client : React.js, netlify로 배포
 - Server : Node.js (express), AWS 로 서버 배포 상태
@@ -20,7 +20,7 @@ DBYM은 'Distance Between You and Me'의 약자로, 서로 다른 지역에 살�
 
 
 
-##Installation##
+## Installation
 
 **Client**
 
@@ -47,7 +47,7 @@ npm start
   	MeetUp.js의 line 27 주석, 28 주석 해제  
   	UserMeetup.js의 line 25 주석, 26 주석 해제
 
-##Features
+## Features
 
 - Facebook을 이용한 로그인 구현
 - Facebook 친구 리스트 연동
@@ -58,7 +58,7 @@ npm start
 
 
 
-##Things to do##
+## Things to do
 
 - 사용자 로그인시 개인정보 (선호 지역 설정 등) 설정 기능
 - Facebook 실제 배포
