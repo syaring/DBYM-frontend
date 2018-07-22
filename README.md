@@ -25,7 +25,7 @@ DBYM은 'Distance Between You and Me'의 약자로, 서로 다른 지역에 살�
 **Client**
 
 ```
-git clone client 사용
+git clone client https://github.com/syaring/DBYM-frontend
 npm install
 npm start
 ```
@@ -36,7 +36,7 @@ npm start
 - 로컬에서 서버를 구동할 경우
 
 ```
-git clone
+git clone https://github.com/syaring/DBYM-backend
 npm install
 npm start
 ```
