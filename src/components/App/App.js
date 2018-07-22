@@ -37,8 +37,8 @@ class App extends Component {
     if (window.FB) {
       window.FB.getLoginStatus((response) => {
         if (response.status === 'connected') {
-          //axios.get(`http://sample-application-development.tzuwucqkx7.us-west-2.elasticbeanstalk.com/userInfo/${response.authResponse.userID}`)
-          axios.get(`http://localhost:8080/userInfo/${response.authResponse.userID}`)
+          axios.get(`http://sample-application-development.tzuwucqkx7.us-west-2.elasticbeanstalk.com/userInfo/${response.authResponse.userID}`)
+          //axios.get(`http://localhost:8080/userInfo/${response.authResponse.userID}`)
           .then(({ data })=> {
             if(data[0]){
               const user = data[0];

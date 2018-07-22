@@ -32,8 +32,8 @@ class MeetUpForm extends Component {
   }
   
   getFriendsList() {
-    //axios.get(`http://sample-application-development.tzuwucqkx7.us-west-2.elasticbeanstalk.com/friends/${this.props.hostId}`).then((friends) => {
-    axios.get(`http://localhost:8080/friends/${this.props.hostId}`).then((friends) => {
+    axios.get(`http://sample-application-development.tzuwucqkx7.us-west-2.elasticbeanstalk.com/friends/${this.props.hostId}`).then((friends) => {
+    //axios.get(`http://localhost:8080/friends/${this.props.hostId}`).then((friends) => {
     this.setState({
         hostsFriends: friends.data,
         isLoaded: true
@@ -57,8 +57,8 @@ class MeetUpForm extends Component {
   }
   
   sendGroupInfo() {
-    //axios.post('http://sample-application-development.tzuwucqkx7.us-west-2.elasticbeanstalk.com/meetups', {
-    axios.post('http://localhost:8080/meetups', {
+    axios.post('http://sample-application-development.tzuwucqkx7.us-west-2.elasticbeanstalk.com/meetups', {
+    //axios.post('http://localhost:8080/meetups', {
       hostId: this.props.hostId,
       title: this.state.title,
       hotPlaces: this.state.places,
