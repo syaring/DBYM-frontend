@@ -9,10 +9,10 @@ import './App.css';
 class App extends Component {
   constructor(props) {
     super(props);
-    
+
     this.state = {
-      isLoggedIn: false,
-      fbId: '',
+      isLoggedIn: true,
+      fbId: '107995293459483',
       userName: '',
       userEmail: '',
       friendList: '',
@@ -21,7 +21,6 @@ class App extends Component {
   }
 
   setUserInfo(user){
-
     this.setState({
       isLoggedIn: true,
       fbId: user.UserFbId,
@@ -34,49 +33,26 @@ class App extends Component {
   }
 
   checkLoginStatus() {
-    if (window.FB) {
-      window.FB.getLoginStatus((response) => {
-        if (response.status === 'connected') {
-          axios.get(`http://sample-application-development.tzuwucqkx7.us-west-2.elasticbeanstalk.com/userInfo/${response.authResponse.userID}`)
-          //axios.get(`http://localhost:8080/userInfo/${response.authResponse.userID}`)
-          .then(({ data })=> {
-            if(data[0]){
-              const user = data[0];
+    axios
+      .get(`http://localhost:8087/userInfo/${this.state.fbId}`)
+      .then(({ data }) => {
+        if(data[0]) {
+          const user = data[0];
 
-              this.setState({
-                isLoggedIn: true,
-                fbId: response.authResponse.userID,
-                userName: user.UserName,
-                userEmail: user.UserEmail,
-                friendList: user.UserFriends,
-                userId: user._id
-              });
-            }
-          });
-        } else {
           this.setState({
-            isLoggedIn: false
-          })
+            isLoggedIn: true,
+            // fbId: response.authResponse.userID,
+            userName: user.UserName,
+            userEmail: user.UserEmail,
+            friendList: user.UserFriends,
+            userId: user._id
+          });
         }
       });
-    } else {
-      setTimeout(this.checkLoginStatus.bind(this), 300);
-    }
   }
 
   componentDidMount() {
     this.checkLoginStatus();
-  }
-
-  componentDidUpdate() {
-    console.log("updated");
-  }
-
-  onClickLogout() {
-    window.FB.logout(response => {
-      console.log(response)
-      this.checkLoginStatus();
-    });
   }
 
   render() {
@@ -87,23 +63,18 @@ class App extends Component {
           <Route exact path='/'
             render={()=>{
               return(
-                !this.state.isLoggedIn ? 
-                  <FBLogin setUserInfo={this.setUserInfo.bind(this)} /> :
                   <Redirect to={`/${this.state.fbId}`} />
               )
             }}
-          /> 
-
+          />
           {
             <Route exact path={`/:uid`}
-              render={(props)=>{ 
+              render={(props)=>{
                 return(
-                  this.state.isLoggedIn ?
+                  this.state.isLoggedIn &&
                   <div>
-                    <div className="log-out" onClick={this.onClickLogout.bind(this)}>facebook logout</div>
                     <UserPage userId={this.state.fbId} userName={this.state.userName} />
-                  </div> :
-                  <Redirect to='/' />
+                  </div>
                 )
               }}
             />
@@ -112,12 +83,10 @@ class App extends Component {
             <Route exact path={`/:uid/new`}
               render={props => {
                 return (
-                  this.state.isLoggedIn ?
+                  this.state.isLoggedIn &&
                   <div>
-                  <div className="log-out" onClick={this.onClickLogout.bind(this)}>facebook logout</div>
-                  <MeetUpForm hostId={props.match.params.uid} hostName={this.state.userName}/>
-                  </div> :
-                  <Redirect to='/' />
+                    <MeetUpForm hostId={props.match.params.uid} hostName={this.state.userName}/>
+                  </div>
                 );
               }}
             />
