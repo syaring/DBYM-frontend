@@ -1,18 +1,20 @@
-import React, { Component } from 'react';
-import { Router, Route, Link, Switch, Redirect } from 'react-router-dom';
-import FBLogin from '../FBLogin/FBLogin';
+import * as axios from 'axios';
+import * as React from 'react';
+import { Route, Switch, Redirect } from 'react-router-dom';
+
 import UserPage from '../UserPage/UserPage';
 import MeetUpForm from '../MeetUpForm/MeetUpForm';
-import axios from 'axios';
+
+// import { StateType, PropsType } from './AppType';
 import './App.css';
 
-class App extends Component {
+class App extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
       isLoggedIn: true,
-      fbId: '107995293459483',
+      fbId: '100139207583564',
       userName: '',
       userEmail: '',
       friendList: '',
