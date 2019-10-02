@@ -1,10 +1,11 @@
 export type AppStateType = {
   isLoggedIn: boolean;
-  user: UserType;
+  userId?: number;
+  user?: UserType;
 }
 export type AppPropsType = {}
 
-export type UserType = {
+export type UserType = {} | {
   _id: number;
   kakaoId: string;
   name: string;

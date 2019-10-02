@@ -4,14 +4,17 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 module.exports = {
-  entry: './src/index.js',
+  resolve: {
+    extensions: ['.wasm', '.js', 'ejs', '.node', '.ts', '.tsx'],
+  },
+  entry: './src/index.tsx',
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname + '/build')
   },
   devServer: {
-    contentBase: path.resolve("./build"),
-    index: "index.html",
+    contentBase: path.resolve('./build'),
+    index: 'index.html',
     port: 3001
   },
   mode: 'none',
@@ -21,6 +24,11 @@ module.exports = {
         test: /\.(js|jsx)$/,
         exclude: '/node_modules',
         use: ['babel-loader'],
+      },
+      {
+        test: /\.(ts|tsx)$/,
+        exclude: '/node_modules',
+        use: ['ts-loader'],
       },
       {
         test: /\.html$/,

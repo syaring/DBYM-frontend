@@ -1,39 +1,58 @@
-import axios from 'axios';
 import * as React from 'react'
+import { observable, computed } from 'mobx'
+import { observer } from 'mobx-react'
 import { Route, Switch, Redirect } from 'react-router-dom'
+import * as _ from 'lodash'
 
-import UserPage from '../UserPage/UserPage'
-import MeetUpForm from 'src/components//MeetUpForm/MeetUpForm'
+import HomePage from 'src/components/Pages/HomePage'
+// import UserPage from 'components/UserPage/UserPage'
+// import MeetUpForm from 'components/MeetUpForm/MeetUpForm'
 
 import {
-  AppStateType as StateType,
-  AppPropsType as PropsType,
+  AppPropsType as Props,
+  AppStateType as State,
+  UserType,
 } from 'src/types/types'
+
+import USERS from 'src/data/tmpUserData'
 
 import './App.css'
 
-class App extends React.Component<PropsType, StateType> {
+class AppStore {
+  @observable user: UserType = {}
+  @observable id = -1
+  get getCurrentUser () {
+    return this.user;
+  }
+  setCurrentUser (id: number) {
+    this.user = _.find(USERS, user => user._id === id) || {}
+  }
+}
 
-  componentDidMount () {
-    this.checkLoginStatus();
+class App extends React.Component<Props, State> {
+
+  state = {
+    isLoggedIn: false
   }
 
-  setUserInfo (user) {
-    this.setState({
-      isLoggedIn: true,
-      userId: '',
-    });
+   componentDidMount () {
+    this.checkLoginStatus()
   }
+
+  // setUserInfo () {
+  // }
 
   checkLoginStatus () {
+
   }
-
-
 
   render () {
     return(
-      <div className="App">
-        <div className="App-contents">
+      <div className='App'>
+        <Switch>
+          <Route exact path='/' component={HomePage} />
+        </Switch>
+        {/* <div className="App-contents">
           <Switch>
           <Route exact path='/'
             render={()=>{
@@ -66,10 +85,10 @@ class App extends React.Component<PropsType, StateType> {
               }}
             />
             </Switch>
-          </div>
+          </div> */}
       </div>
-    );
+    )
   }
 }
 
-export default App;
+export default App
