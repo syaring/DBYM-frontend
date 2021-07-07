@@ -20,22 +20,21 @@ class UserMeetups extends Component {
   componentDidMount() {
     this.getUserInfo();
   }
-  
+
   getUserInfo() {
-    axios.get(`http://sample-application-development.tzuwucqkx7.us-west-2.elasticbeanstalk.com/meetups/${this.props.uid}`).then((meet)=>{
-    //axios.get(`http://localhost:8080/meetups/${this.props.uid}`).then((meet)=>{
+    axios.get(`http://localhost:8087/meetups/${this.props.uid}`).then((meet)=>{
       this.setState({
         meetupsList: meet.data,
         isLoaded: true
       });
     });
   }
-  
+
   render() {
     return (
       <div className="UserMeetups">
         {
-          this.state.isLoaded 
+          this.state.isLoaded
           ?
           (<div className="meetup-containser">
             {this.state.meetupsList.map((data, index) => {

@@ -17,15 +17,13 @@ class Meetups extends Component {
       place: this.props.meetupInfo.meetupsPlace,
       isEntered: this.props.meetupInfo.isEntered,
       meetupId: this.props.meetupInfo.meetupsId,
-      
     }
   }
 
   setMyLocation(mid) {
     navigator.geolocation.getCurrentPosition((p)=> {
       if(p){
-        axios.post(`http://sample-application-development.tzuwucqkx7.us-west-2.elasticbeanstalk.com/meetups/setloca/${mid}`, {
-        //axios.post(`http://localhost:8080/meetups/setloca/${mid}`, {
+        axios.post(`http://localhost:8087/meetups/setloca/${mid}`, {
           uid: this.state.uid,
           lat: p.coords.latitude,
           lng: p.coords.longitude
@@ -67,11 +65,11 @@ class Meetups extends Component {
               '정하는중'
             }
           </div>
-        </li> 
+        </li>
         <li className="muInfos">
           <div className="category last">MY LOCATION</div>
           <div className="contents">
-            { this.state.isEntered ? 
+            { this.state.isEntered ?
               '전송완료' :
               <button type="button"className="loca-button"
                 onClick={this.setMyLocation.bind(this, this.state.meetupId)} >

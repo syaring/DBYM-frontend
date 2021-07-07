@@ -30,10 +30,9 @@ class MeetUpForm extends Component {
   componentDidMount() {
     this.getFriendsList();
   }
-  
+
   getFriendsList() {
-    axios.get(`http://sample-application-development.tzuwucqkx7.us-west-2.elasticbeanstalk.com/friends/${this.props.hostId}`).then((friends) => {
-    //axios.get(`http://localhost:8080/friends/${this.props.hostId}`).then((friends) => {
+    axios.get(`http://localhost:8087/friends/${this.props.hostId}`).then((friends) => {
     this.setState({
         hostsFriends: friends.data,
         isLoaded: true
@@ -55,10 +54,10 @@ class MeetUpForm extends Component {
       }
     });
   }
-  
+
   sendGroupInfo() {
-    axios.post('http://sample-application-development.tzuwucqkx7.us-west-2.elasticbeanstalk.com/meetups', {
-    //axios.post('http://localhost:8080/meetups', {
+    // axios.post('http://sample-application-development.tzuwucqkx7.us-west-2.elasticbeanstalk.com/meetups', {
+    axios.post('http://localhost:8087/meetups', {
       hostId: this.props.hostId,
       title: this.state.title,
       hotPlaces: this.state.places,
@@ -90,7 +89,7 @@ class MeetUpForm extends Component {
 
     let placesTmp = this.state.places;
     let stationsTmp = this.state.stations;
-    
+
     if ((placesTmp.length < 5) && (!placesTmp.includes(fullName))) {
       placesTmp.push(fullName);
     } else if(placesTmp.includes(fullName)) {
@@ -115,7 +114,7 @@ class MeetUpForm extends Component {
 
     let stationsTmp = this.state.stations;
     let placesTmp = this.state.places;
-    
+
     stationsTmp.splice(stationsTmp.indexOf(stationName), 1);
     placesTmp.splice(placesTmp.indexOf(fullName), 1);
 
@@ -147,7 +146,7 @@ class MeetUpForm extends Component {
       lineName: line["line"]
     });
   }
-  
+
   render() {
     return (
       <div className="MeetUpForm">
